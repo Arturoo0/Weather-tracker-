@@ -39,6 +39,10 @@ button {
 }
 
 #addTracker {
+  margin-bottom: 5px;
+}
+
+#buttons {
   color: white;
   bottom: 10px;
   right: 3px;
