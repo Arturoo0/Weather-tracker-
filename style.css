@@ -1,0 +1,21 @@
+
+body {
+  text-align: center;
+}
+
+#title {
+  color: #364f6b;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+#title_span {
+  color: #3fc1c9;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+
+#card_container{
+  padding: 20px 20px;
+}
