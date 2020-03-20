@@ -1,5 +1,6 @@
 
-const addTracker = document.querySelector(".button");
+const addTracker = document.querySelector("#addTracker");
+const removeTracker = document.querySelector("#removeTracker");
 
 const cardHTML = `
 <div class="card">
@@ -19,22 +20,35 @@ function createColumn() {
   return newCol;
 }
 
+removeTracker.onclick = () => {
+  const cardContainer = document.querySelector('#card_container');
+  const lastRow = cardContainer.lastElementChild;
+
+  lastRow.lastElementChild.remove();
+
+  if (lastRow.innerHTML === ""){
+    lastRow.remove();
+  }
+}
+
 addTracker.onclick = () => {
   const cardCols = document.querySelectorAll(".col-lg-4");
   const cardContainer = document.querySelector("#card_container");
 
-  if (cardCols.length % 3 === 0){
-    const newRow = document.createElement('div');
-    newRow.className = "row justify-content-center align-items-center";
+  if (cardCols.length < 10){
+    if (cardCols.length % 3 === 0){
+      const newRow = document.createElement('div');
+      newRow.className = "row justify-content-center align-items-center";
 
-    const newCol = createColumn();
+      const newCol = createColumn();
 
-    newRow.appendChild(newCol);
-    cardContainer.appendChild(newRow);
-  }else{
-    const lastRow = cardContainer.lastElementChild;
+      newRow.appendChild(newCol);
+      cardContainer.appendChild(newRow);
+    }else{
+      const lastRow = cardContainer.lastElementChild;
 
-    const newCol = createColumn();
-    lastRow.appendChild(newCol);
+      const newCol = createColumn();
+      lastRow.appendChild(newCol);
+    }
   }
 };
