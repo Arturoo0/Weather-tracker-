@@ -31,11 +31,11 @@ button {
 
 .button {
   background-color: #364f6b;
-  padding: 18px 35px;
-  font-size: 1rem;
-  font-weight: bold;
-  display: inline-block;
-  border-radius: 20px;
+  font-size: 2rem;
+  display: block;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
 }
 
 #addTracker {
