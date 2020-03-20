@@ -48,3 +48,12 @@ button {
   right: 3px;
   position: fixed;
 }
+
+.card-btn {
+  background: #3fc1c9;
+  border: none;
+}
+
+.card-btn:hover {
+  background: #2fa1a9;
+}
