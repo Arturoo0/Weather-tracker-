@@ -1,6 +1,5 @@
 
 const addTracker = document.querySelector(".button");
-console.log(addTracker);
 
 const cardHTML = `
 <div class="card">
@@ -13,7 +12,7 @@ const cardHTML = `
 `
 
 function createColumn() {
-  let newCol = document.createElement('div');
+  const newCol = document.createElement('div');
   newCol.className = "col-lg-4 col-md-6";
   newCol.innerHTML = cardHTML;
 
@@ -21,22 +20,21 @@ function createColumn() {
 }
 
 addTracker.onclick = () => {
-  cardCols = document.querySelectorAll(".col-lg-4");
-  cardContainer = document.querySelector("#card_container");
+  const cardCols = document.querySelectorAll(".col-lg-4");
+  const cardContainer = document.querySelector("#card_container");
 
   if (cardCols.length % 3 === 0){
-    let newRow = document.createElement('div');
+    const newRow = document.createElement('div');
     newRow.className = "row justify-content-center align-items-center";
 
-    let newCol = createColumn();
+    const newCol = createColumn();
 
     newRow.appendChild(newCol);
     cardContainer.appendChild(newRow);
-
   }else{
-    let lastRow = cardContainer.lastElementChild;
+    const lastRow = cardContainer.lastElementChild;
 
-    let newCol = createColumn();
+    const newCol = createColumn();
     lastRow.appendChild(newCol);
   }
 };
