@@ -7,7 +7,8 @@ body {
   color: #364f6b;
   font-size: 4rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 #title_span {
@@ -45,7 +46,8 @@ button {
 #buttons {
   color: white;
   bottom: 10px;
-  right: 3px;
+  right: 60px;
+  bottom: 60px;
   position: fixed;
 }
 
