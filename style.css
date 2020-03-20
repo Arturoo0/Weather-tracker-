@@ -7,6 +7,7 @@ body {
   color: #364f6b;
   font-size: 4rem;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 #title_span {
@@ -20,16 +21,26 @@ body {
   margin-bottom: 30px;
 }
 
+.card {
+  margin-bottom: 15px;
+}
+
 button {
   all: unset;
 }
 
 .button {
-  color: black;
-  background-color: red;
+  background-color: #364f6b;
   padding: 18px 35px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   display: inline-block;
   border-radius: 20px;
+}
+
+#addTracker {
+  color: white;
+  bottom: 10px;
+  right: 3px;
+  position: fixed;
 }

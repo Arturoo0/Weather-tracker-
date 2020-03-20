@@ -2,8 +2,7 @@
 addTracker = document.querySelector(".button");
 console.log(addTracker);
 
-addTracker.onClick = () => {
-
+addTracker.onclick = () => {
   cardCols = document.querySelectorAll(".col-lg-4");
   cardContainer = document.querySelector("#card_container");
 
@@ -30,7 +29,21 @@ addTracker.onClick = () => {
     cardContainer.appendChild(newRow);
 
   }else{
+    let rows = document.querySelectorAll(".row");
 
+    let newCol = document.createElement('div');
+    newCol.className = "col-lg-4 col-md-6";
+
+    newCol.innerHTML = `
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    `;
+    rows[rows.length - 1].appendChild(newCol);
   }
-
 };
