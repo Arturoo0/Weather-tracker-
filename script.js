@@ -35,7 +35,7 @@ addTracker.onclick = () => {
   const cardCols = document.querySelectorAll(".col-lg-4");
   const cardContainer = document.querySelector("#card_container");
 
-  if (cardCols.length < 10){
+  if (cardCols.length < 9){
     if (cardCols.length % 3 === 0){
       const newRow = document.createElement('div');
       newRow.className = "row justify-content-center align-items-center";
