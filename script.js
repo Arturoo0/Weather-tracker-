@@ -20,16 +20,16 @@ function createColumn() {
   return newCol;
 }
 
-removeTracker.onclick = () => {
-  const cardContainer = document.querySelector('#card_container');
-  const lastRow = cardContainer.lastElementChild;
-
-  lastRow.lastElementChild.remove();
-
-  if (lastRow.innerHTML === ""){
-    lastRow.remove();
-  }
-}
+// removeTracker.onclick = () => {
+//   const cardContainer = document.querySelector('#card_container');
+//   const lastRow = cardContainer.lastElementChild;
+//
+//   lastRow.lastElementChild.remove();
+//
+//   if (lastRow.innerHTML === ""){
+//     lastRow.remove();
+//   }
+// }
 
 addTracker.onclick = () => {
   const cardCols = document.querySelectorAll(".col-lg-4");

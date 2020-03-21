@@ -60,3 +60,7 @@ button {
 .card-btn:hover {
   background: #2fa1a9;
 }
+
+.removeTracker {
+  font-size: .7;
+}
