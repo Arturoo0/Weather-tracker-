@@ -4,7 +4,7 @@ const removeTracker = document.querySelector("#removeTracker");
 
 const cardHTML = `
 <div class="card">
-  <div class="card-body">
+  <div class="card-body animated fadeIn">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary card-btn">Go somewhere</a>
@@ -36,7 +36,7 @@ addTracker.onclick = () => {
   const cardContainer = document.querySelector("#card_container");
 
   if (cardCols.length < 9){
-    if (cardCols.length % 3 === 0){
+    if (cardCols.length % 2 === 0){
       const newRow = document.createElement('div');
       newRow.className = "row justify-content-center align-items-center";
 
