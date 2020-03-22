@@ -14,6 +14,7 @@ const cardHTML = `
   </div>
 </div>
 `
+
 function createColumn() {
   const newCol = document.createElement('div');
   newCol.className = "col-lg-4 col-md-6 animated slideInUp";
@@ -23,15 +24,18 @@ function createColumn() {
 }
 
 function deleteTracker(element){
-  if (element.parentNode.parentNode.parentNode.parentNode.parentNode.children.length === 1){
-    element.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
+  let totalRows = document.querySelectorAll(".row");
+  let lastRow = totalRows[totalRows.length - 1];
+
+  if (lastRow.children.length === 1){
+    lastRow.remove();
   }else{
-    element.parentNode.parentNode.parentNode.parentNode.remove();
+    lastRow.lastElementChild.remove();
   }
 
-  const totalRows = document.querySelectorAll(".row");
+  totalRows = document.querySelectorAll(".row");
   let card_container = document.querySelector("#card_container");
-  let cardStack = document.querySelectorAll(".col-lg-4");
+  const cardStack = document.querySelectorAll(".col-lg-4");
 
   for (let i = 0; i < totalRows.length; i++){
     totalRows[i].innerHTML = "";
@@ -48,7 +52,6 @@ function deleteTracker(element){
         break;
     }
   }
-
 }
 
 addTracker.onclick = () => {
