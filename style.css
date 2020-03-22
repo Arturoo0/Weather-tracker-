@@ -39,6 +39,7 @@ button {
   border-radius: 50%;
   height: 60px;
   width: 60px;
+  transition: 0.5s;
 }
 
 #addTracker {
@@ -61,6 +62,11 @@ button {
   background: #2fa1a9;
 }
 
+<<<<<<< HEAD
 .removeTracker {
   font-size: .7;
+=======
+.button:hover {
+  background: #2fa1a9;
+>>>>>>> 09c5395ddf9b8b6da3dee3ba210a883e53e4879d
 }
