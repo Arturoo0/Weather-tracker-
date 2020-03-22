@@ -14,27 +14,26 @@
     </div>
     <div id="card_container">
       <div class="row justify-content-center align-items-center">
-        <div class="col-lg-4 col-md-6">
-          <div class="card animated fadeIn">
+        <div class="col-lg-4 col-md-6 animated slideInUp">
+          <div class="card">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               <div class="d-flex justify-content-between">
                 <a href="#" class="btn btn-primary card-btn">Go somewhere</a>
-                <button class="removeTracker" type="button" name="button">🗑</button>
+                <button class="removeTracker" type="button" name="button" onclick="deleteTracker(this)">🗑</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="card animated fadeIn">
+        <div class="col-lg-4 col-md-6 animated slideInUp">
+          <div class="card">
             <div class="card-body">
               <h5 class="card-title">Card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <!-- <a href="#" class="btn btn-primary card-btn">Go somewhere</a> -->
               <div class="d-flex justify-content-between">
                 <a href="#" class="btn btn-primary card-btn">Go somewhere</a>
-                <button class="removeTracker" type="button" name="button">🗑</button>
+                <button class="removeTracker" type="button" name="button" onclick="deleteTracker(this)">🗑</button>
               </div>
             </div>
           </div>
@@ -44,11 +43,8 @@
 
     <div id="buttons">
       <div id="addTracker">
-        <button class="button" type="button" name="button">+</button>
+        <button class="button" type="button" name="button">➕</button>
       </div>
-      <!-- <div id="removeTracker">
-        <button class="button" type="button" name="button">-</button>
-      </div> -->
     </div>
 
     <script src="script.js"></script>
