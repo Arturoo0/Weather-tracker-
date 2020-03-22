@@ -12,19 +12,34 @@ body {
   margin-bottom: 40px;
 }
 
-#title_span {
+#title-span {
   color: #3fc1c9;
   font-size: 4rem;
   font-weight: bold;
 }
 
-#card_container{
+/* Card CSS */
+
+#card-container{
   padding: 20px 20px;
   margin-bottom: 30px;
 }
 
 .card {
   margin-bottom: 15px;
+}
+
+.card-btn {
+  background: #3fc1c9;
+  border: none;
+}
+
+.card-btn:hover {
+  background: #2fa1a9;
+}
+
+.remove-btn {
+  font-size: .7;
 }
 
 button {
@@ -42,31 +57,20 @@ button {
   transition: 0.5s;
 }
 
-#addTracker {
-  margin-bottom: 5px;
+.button:hover {
+  background: #2fa1a9;
 }
 
-#buttons {
+/* Control CSS */
+
+#control {
   color: white;
   right: 60px;
   bottom: 60px;
   position: fixed;
 }
 
-.card-btn {
-  background: #3fc1c9;
-  border: none;
+#add-tracker {
+  margin-bottom: 5px;
 }
 
-.card-btn:hover {
-  background: #2fa1a9;
-}
-
-<<<<<<< HEAD
-.removeTracker {
-  font-size: .7;
-=======
-.button:hover {
-  background: #2fa1a9;
->>>>>>> 09c5395ddf9b8b6da3dee3ba210a883e53e4879d
-}
