@@ -36,13 +36,16 @@ function createColumn() {
 // }
 
 function deleteTracker(element){
-  element.parentNode.parentNode.parentNode.parentNode.remove();
+  if (element.parentNode.parentNode.parentNode.parentNode.parentNode.children.length === 1){
+    element.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
+  }else{
+    element.parentNode.parentNode.parentNode.parentNode.remove();
+  }
 
-  let card_container = document.querySelector("#card_container");
   const totalRows = document.querySelectorAll(".row");
+  let card_container = document.querySelector("#card_container");
   let cardStack = document.querySelectorAll(".col-lg-4");
 
-  console.log(totalRows);
   for (let i = 0; i < totalRows.length; i++){
     totalRows[i].innerHTML = "";
   }
