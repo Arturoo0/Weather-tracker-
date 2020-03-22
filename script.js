@@ -16,40 +16,16 @@ const cardHTML = `
   </div>
 </div>
 `
-<<<<<<< HEAD
-=======
-
-function createColumn() {
-  const newCol = document.createElement('div');
-  newCol.className = "col-lg-4 col-md-6 animated slideInUp";
-  newCol.innerHTML = cardHTML;
->>>>>>> master
 
 function removeCard(event) {
   const parentCard = event.target.closest(".col-lg-4");
   const allCards = cardRow.querySelectorAll(".col-lg-4");;
 
-<<<<<<< HEAD
   cardRow.innerHTML = "";
 
   allCards.forEach(card => {
     cardRow.appendChild(card);
   });
-=======
-function deleteTracker(element){
-  let totalRows = document.querySelectorAll(".row");
-  let lastRow = totalRows[totalRows.length - 1];
-
-  if (lastRow.children.length === 1){
-    lastRow.remove();
-  }else{
-    lastRow.lastElementChild.remove();
-  }
-
-  totalRows = document.querySelectorAll(".row");
-  let card_container = document.querySelector("#card_container");
-  const cardStack = document.querySelectorAll(".col-lg-4");
->>>>>>> master
 
   parentCard.remove();
 }
@@ -59,22 +35,10 @@ function addCard(row) {
   newCard.className = "col-lg-4 col-md-6 animated slideInUp";
   newCard.innerHTML = cardHTML;
 
-<<<<<<< HEAD
   const removeButton = newCard.querySelector(".removeTracker");
   removeButton.onclick = removeCard;
 
   row.appendChild(newCard);
-=======
-  for (let i = 0; i < totalRows.length; i++){
-    for (let j = 0; j < 2; j++){
-      if (myArray.length != 0){
-        totalRows[i].appendChild(myArray.shift());
-      }
-      else
-        break;
-    }
-  }
->>>>>>> master
 }
 
 addTracker.onclick = () => {
