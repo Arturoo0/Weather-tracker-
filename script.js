@@ -1,7 +1,6 @@
 
-const addTracker = document.querySelector("#addTracker");
-const removeTracker = document.querySelector("#removeTracker");
-const cardContainer = document.querySelector("#card_container");
+const addTracker = document.querySelector("#add-tracker");
+const cardContainer = document.querySelector("#card-container");
 const cardRow = cardContainer.querySelector("#card-row");
 
 const cardHTML = `
@@ -11,7 +10,7 @@ const cardHTML = `
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn">Go somewhere</a>
-      <button class="removeTracker" type="button" name="button" onclick="removeCard(event)">🗑</button>
+      <button class="remove-btn" type="button" name="button" onclick="removeCard(event)">🗑</button>
     </div>
   </div>
 </div>
@@ -35,7 +34,7 @@ function addCard(row) {
   newCard.className = "col-lg-4 col-md-6 animated slideInUp";
   newCard.innerHTML = cardHTML;
 
-  const removeButton = newCard.querySelector(".removeTracker");
+  const removeButton = newCard.querySelector(".remove-btn");
   removeButton.onclick = removeCard;
 
   row.appendChild(newCard);
