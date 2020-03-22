@@ -22,19 +22,6 @@ function createColumn() {
   return newCol;
 }
 
-// removeTracker.onclick = () => {
-//   // const cardContainer = document.querySelector('#card_container');
-//   // const lastRow = cardContainer.lastElementChild;
-//   //
-//   // lastRow.lastElementChild.remove();
-//   //
-//   // if (lastRow.innerHTML === ""){
-//   //   lastRow.remove();
-//   // }
-//   console.log('test');
-//
-// }
-
 function deleteTracker(element){
   if (element.parentNode.parentNode.parentNode.parentNode.parentNode.children.length === 1){
     element.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
