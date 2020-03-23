@@ -74,3 +74,6 @@ button {
   margin-bottom: 5px;
 }
 
+.currentWeather {
+  font-size: 7rem;
+}
