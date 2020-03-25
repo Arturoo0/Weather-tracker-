@@ -31,7 +31,7 @@
                   <div class="card">
                     <div class="card-body">
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary card-btn">View forecast</a>
+                    <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecastModal">View forecast</a>
                     </div>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                   <div class="card">
                     <div class="card-body">
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary card-btn">View forecast</a>
+                      <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecastModal">View forecast</a>
                     </div>
                   </div>
                 </div>
@@ -79,6 +79,40 @@
         <button class="button" type="button" name="button">+</button>
       </div>
     </div>
+
+    <div class="modal fade" id="forecastModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Forecast</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">1pm</div>
+              <div class="w-100"></div>
+              <div class="col">3pm</div>
+              <div class="w-100"></div>
+              <div class="col">5pm</div>
+              <div class="w-100"></div>
+              <div class="col">7pm</div>
+              <div class="w-100"></div>
+              <div class="col">9pm</div>
+              <div class="w-100"></div>
+              <div class="col">11pm</div>
+              <div class="w-100"></div>
+              <div class="col">1am</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
