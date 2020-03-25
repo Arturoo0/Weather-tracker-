@@ -34,8 +34,8 @@ const cardHTML = `
 `
 
 function removeCard(event) {
-  const parentCard = event.target.closest(".col-lg-4");
-  const allCards = cardRow.querySelectorAll(".col-lg-4");;
+  const parentCard = event.target.closest(".col-lg-6");
+  const allCards = cardRow.querySelectorAll(".col-lg-6");;
 
   cardRow.innerHTML = "";
 
@@ -48,7 +48,7 @@ function removeCard(event) {
 
 function addCard(row) {
   const newCard = document.createElement("div");
-  newCard.className = "col-lg-4 col-md-6 animated slideInUp";
+  newCard.className = "col-lg-6 col-md-6 animated slideInUp";
   newCard.innerHTML = cardHTML;
 
   const removeButton = newCard.querySelector(".remove-btn");
