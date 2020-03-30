@@ -6,6 +6,10 @@ const config = require("./config");
 
 const app = express();
 
+function convertKtoF(temp){
+  return 1.8 * (temp - 273) + 32;
+}
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -19,11 +23,11 @@ app.get("/test", async (req, res) => {
 
   let js = await response.json();
 
-  console.log(js);
+  console.log(js.main.temp);
 
   res.render("test", {
     name : js.name,
-    temp : js.main.temp
+    temp : convertKtoF(Math.floor(parseFloat(js.main.temp)))
   });
 });
 
