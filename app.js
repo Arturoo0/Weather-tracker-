@@ -23,8 +23,6 @@ app.get("/test", async (req, res) => {
 
   let js = await response.json();
 
-  console.log(js.main.temp);
-
   res.render("test", {
     name : js.name,
     temp : convertKtoF(Math.floor(parseFloat(js.main.temp)))
