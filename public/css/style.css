@@ -77,3 +77,16 @@ button {
 .currentWeather {
   font-size: 7rem;
 }
+
+.temp {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.rain {
+  font-size: 4rem;
+}
+
+.time {
+  font-size: 1.6rem;
+}
