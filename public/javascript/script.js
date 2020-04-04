@@ -12,7 +12,7 @@ const cardHTML = `
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-          <p class="card-text currentWeather">🌧</p>
+          <p class="card-text current-weather">🌧</p>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecastModal">View forecast</a>
+            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal">View forecast</a>
           </div>
         </div>
       </div>
