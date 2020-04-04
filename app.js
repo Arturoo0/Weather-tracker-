@@ -8,7 +8,7 @@ const config = require("./config");
 const app = express();
 
 function convertKtoF(temp){
-  return 1.8 * (temp - 273) + 32;
+  return Math.floor(1.8 * (temp - 273) + 32);
 }
 
 app.use(express.static("public"));
