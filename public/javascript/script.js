@@ -33,6 +33,15 @@ const cardHTML = `
 </div>
 `
 
+async function getLocationData(location) {
+  const requestURL = `/location?q=${location}`;
+
+  let response = await fetch(requestURL);
+  let data = await response.json();
+
+  return data;
+}
+
 function removeCard(event) {
   const parentCard = event.target.closest(".col-lg-6");
   const allCards = cardRow.querySelectorAll(".col-lg-6");;
@@ -55,9 +64,29 @@ function addCard(row) {
   removeButton.onclick = removeCard;
 
   row.appendChild(newCard);
+
+  return newCard;
+}
+
+async function updateCard(card, location) {
+  const locationData = await getLocationData(location);
+
+  let cardTitle = card.querySelector(".card-title");
+  let cardTemp = card.querySelector(".card-text");
+
+  cardTitle.innerHTML = locationData.name;
+  cardTemp.innerHTML = locationData.temp;
 }
 
 addTracker.onclick = () => {
   if(cardRow.children.length >= 8) return;
   addCard(cardRow);
+}
+
+window.onload = async () => {
+  let card1 = addCard(cardRow);
+  let card2 = addCard(cardRow);
+
+  await updateCard(card1, "New York");
+  await updateCard(card2, "Miami");
 }
