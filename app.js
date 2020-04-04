@@ -1,5 +1,6 @@
 
 const express = require("express");
+
 const ejs = require("ejs");
 const fetch = require("node-fetch");
 const config = require("./config");
@@ -17,15 +18,34 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/test", async (req, res) => {
-  const requestURL = `https://api.openweathermap.org/data/2.5/weather?q=Hialeah,Florida,US&appid=${config.apikey}`
-  let response = await fetch(requestURL);
+app.get("/location", async (req, res) => {
 
-  let js = await response.json();
+  // Handle missing query parameter
+  if(!req.query.q) return res.status(400).json({
+    status : 400,
+    message : "Missing required parameter q."
+  });
 
-  res.render("test", {
-    name : js.name,
-    temp : convertKtoF(Math.floor(parseFloat(js.main.temp)))
+  if(typeof(req.query.q) !== "string") return res.status(400).json({
+    status : 400,
+    message : "Invalid parameter q."
+  });
+
+  const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${req.query.q}&appid=${config.apikey}`
+
+  let response = await fetch(apiURL);
+  let weatherData = await response.json();
+
+  if(weatherData.cod !== 200) return res.status(400).json({
+    status : 400,
+    message : "Location not found."
+  });
+
+  return res.status(200).json({
+    status : 200,
+    name : weatherData.name,
+    country : weatherData.sys.country,
+    temp : convertKtoF(weatherData.main.temp),
   });
 });
 
