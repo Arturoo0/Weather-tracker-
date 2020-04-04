@@ -72,8 +72,8 @@ async function updateCard(card, location) {
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".card-text");
 
-  cardTitle.innerHTML = locationData.name;
-  cardTemp.innerHTML = locationData.temp;
+  cardTitle.innerHTML = `${locationData.name}`;
+  cardTemp.innerHTML = `${locationData.temp}°`;
 }
 
 addTracker.onclick = () => {
