@@ -55,15 +55,13 @@ function removeCard(event) {
   parentCard.remove();
 }
 
-function addCard(row) {
+function newCard() {
   const newCard = document.createElement("div");
   newCard.className = "col-lg-6 col-md-6 animated slideInUp";
   newCard.innerHTML = cardHTML;
 
   const removeButton = newCard.querySelector(".remove-btn");
   removeButton.onclick = removeCard;
-
-  row.appendChild(newCard);
 
   return newCard;
 }
@@ -80,13 +78,18 @@ async function updateCard(card, location) {
 
 addTracker.onclick = () => {
   if(cardRow.children.length >= 8) return;
-  addCard(cardRow);
+  let card = newCard();
+
+  cardRow.appendChild(card);
 }
 
 window.onload = async () => {
-  let card1 = addCard(cardRow);
-  let card2 = addCard(cardRow);
+  let card1 = newCard();
+  let card2 = newCard();
 
   await updateCard(card1, "New York");
   await updateCard(card2, "Miami");
+
+  cardRow.appendChild(card1);
+  cardRow.appendChild(card2);
 }
