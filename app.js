@@ -49,6 +49,41 @@ app.get("/location", async (req, res) => {
   });
 });
 
+app.get("/forecast", async (req, res) => {
+
+  console.log(res);
+
+  if(!req.query.q) return res.status(400).json({
+    status : 400,
+    message : "Missing required parameter q."
+  });
+
+  if(typeof(req.query.q) !== "string") return res.status(400).json({
+    status : 400,
+    message : "Invalid parameter q."
+  });
+
+  const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${req.query.q}&appid=${config.apikey}`
+
+  let response = await fetch(apiURL);
+  let weatherData = await response.json();
+
+  console.log(weatherData);
+
+  if(weatherData.cod !== "200") return res.status(400).json({
+    status : 400,
+    message : "Location not found."
+  });
+
+  console.log(weatherData);
+
+  return res.status(200).json({
+    status : 200,
+    time : weatherData.list
+  });
+
+});
+
 app.listen(3000, () => {
   console.log("Server started at port 3000!");
 });
