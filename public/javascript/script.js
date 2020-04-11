@@ -33,8 +33,19 @@ const cardHTML = `
 </div>
 `
 
+
+
 async function getLocationData(location) {
   const requestURL = `/location?q=${location}`;
+
+  let response = await fetch(requestURL);
+  let data = await response.json();
+
+  return data;
+}
+
+async function getForecastData(location) {
+  const requestURL = '/forecast?q=${forecast}';
 
   let response = await fetch(requestURL);
   let data = await response.json();
@@ -68,6 +79,7 @@ function newCard() {
 
 async function updateCard(card, location) {
   const locationData = await getLocationData(location);
+  const forecastData = await getForecastData(location);
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".card-text");
