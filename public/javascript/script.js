@@ -20,7 +20,7 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal">View forecast</a>
+            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(this)">View forecast</a>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@ async function getLocationData(location) {
 }
 
 async function getForecastData(location) {
-  const requestURL = '/forecast?q=${forecast}';
+  const requestURL = `/forecast?q=${location}`;
 
   let response = await fetch(requestURL);
   let data = await response.json();
@@ -79,13 +79,26 @@ function newCard() {
 
 async function updateCard(card, location) {
   const locationData = await getLocationData(location);
-  const forecastData = await getForecastData(location);
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".card-text");
 
   cardTitle.innerHTML = `${locationData.name}`;
   cardTemp.innerHTML = `${locationData.temp}°`;
+}
+
+async function displayForecast(card){
+  // const location = card.closest(".card-title");
+  const location = "las vegas";
+  const forecastData = await getForecastData(location);
+  let modal = document.querySelectorAll(".col-4 .row");
+
+  for (let i = 0; i < modal.length; i++){
+    let rain = modal[i].querySelector(".rain");
+    let temp = modal[i].querySelector(".temp");
+    temp.innerHTML = forecastData.forecast[i].main.temp;
+  }
+
 }
 
 addTracker.onclick = () => {

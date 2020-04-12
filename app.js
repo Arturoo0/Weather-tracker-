@@ -68,18 +68,14 @@ app.get("/forecast", async (req, res) => {
   let response = await fetch(apiURL);
   let weatherData = await response.json();
 
-  console.log(weatherData);
-
   if(weatherData.cod !== "200") return res.status(400).json({
     status : 400,
     message : "Location not found."
   });
 
-  console.log(weatherData);
-
   return res.status(200).json({
     status : 200,
-    time : weatherData.list
+    forecast : weatherData.list
   });
 
 });
