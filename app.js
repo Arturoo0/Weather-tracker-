@@ -73,6 +73,10 @@ app.get("/forecast", async (req, res) => {
     message : "Location not found."
   });
 
+  weatherData.list.forEach(forecast => {
+    forecast.main.temp = convertKtoF(forecast.main.temp);
+  });
+
   return res.status(200).json({
     status : 200,
     forecast : weatherData.list
