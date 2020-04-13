@@ -58,24 +58,11 @@ function createModalBody() {
   }
 }
 
-async function getLocationData(location) {
-  const requestURL = `/location?q=${location}`;
-
-  let response = await fetch(requestURL);
-  let data = await response.json();
-
-  return data;
-}
-
-async function getForecastData(location) {
-  const requestURL = `/forecast?q=${location}`;
-
+async function getEndpointData(location, endpoint) {
+  const requestURL = `/${endpoint}?q=${location}`;
   const requestData = sessionStorage.getItem(requestURL);
 
-  if(requestData !== null) {
-    console.log("Data already cached!");
-    return JSON.parse(requestData);
-  }
+  if(requestData !== null) return JSON.parse(requestData);
 
   let response = await fetch(requestURL);
   let data = await response.json();
@@ -110,7 +97,7 @@ function newCard() {
 }
 
 async function updateCard(card, location) {
-  const locationData = await getLocationData(location);
+  const locationData = await getEndpointData(location, "location");
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
@@ -125,7 +112,7 @@ async function displayForecast(event){
   const parentCard = event.target.closest(".col-lg-6");
   const locationName = parentCard.querySelector(".card-title");
 
-  const forecastData = await getForecastData(locationName.innerText);
+  const forecastData = await getEndpointData(locationName.innerText, "forecast");
 
   let modal = document.querySelectorAll(".col-4 .row");
 
