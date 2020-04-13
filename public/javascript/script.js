@@ -20,7 +20,7 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(this)">View forecast</a>
+            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
           </div>
         </div>
       </div>
@@ -33,7 +33,11 @@ const cardHTML = `
 </div>
 `
 
-
+const weatherMapping = {
+  ["Clouds"] : "☁️",
+  ["Clear"] : "☀️",
+  ["Rain"] : "🌧"
+};
 
 async function getLocationData(location) {
   const requestURL = `/location?q=${location}`;
@@ -98,7 +102,13 @@ async function displayForecast(event){
   for (let i = 0; i < modal.length; i++){
     let rain = modal[i].querySelector(".rain");
     let temp = modal[i].querySelector(".temp");
+
     temp.innerHTML = forecastData.forecast[i].main.temp + "°";
+    let description = forecastData.forecast[i].weather[0].main;
+
+    rain.innerHTML = weatherMapping[description];
+
+    console.log(description);
   }
 }
 
