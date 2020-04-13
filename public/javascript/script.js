@@ -30,12 +30,33 @@ const cardHTML = `
   </div>
 </div>
 `
+const modalColHTML = `
+<div class="row">
+  <div class="col-12 rain text-center">...</div>
+  <div class="col-6 temp">...</div>
+  <div class="col-6 time">...</div>
+</div>
+`
 
 const weatherMapping = {
   ["Clouds"] : "☁️",
   ["Clear"] : "☀️",
   ["Rain"] : "🌧"
 };
+
+function createModalBody() {
+  const modalRow = document.querySelector(".modal-row");
+
+  const colClassList = ["col-4", "border"];
+
+  for(let i = 0; i < 8; ++i) {
+    const col = document.createElement("div");
+    col.classList.add(...colClassList);
+
+    col.innerHTML = modalColHTML;
+    modalRow.appendChild(col);
+  }
+}
 
 async function getLocationData(location) {
   const requestURL = `/location?q=${location}`;
@@ -103,12 +124,10 @@ async function displayForecast(event){
     let rain = modal[i].querySelector(".rain");
     let temp = modal[i].querySelector(".temp");
 
-    temp.innerHTML = forecastData.forecast[i].main.temp + "°";
+    temp.innerHTML = `${forecastData.forecast[i].main.temp}°`;
     let description = forecastData.forecast[i].weather[0].main;
 
     rain.innerHTML = weatherMapping[description];
-
-    console.log(description);
   }
 }
 
@@ -125,6 +144,8 @@ cardAdd.onclick = async () => {
 }
 
 window.onload = async () => {
+  createModalBody();
+
   let card1 = newCard();
   let card2 = newCard();
 
