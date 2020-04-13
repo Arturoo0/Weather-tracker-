@@ -70,8 +70,17 @@ async function getLocationData(location) {
 async function getForecastData(location) {
   const requestURL = `/forecast?q=${location}`;
 
+  const requestData = sessionStorage.getItem(requestURL);
+
+  if(requestData !== null) {
+    console.log("Data already cached!");
+    return JSON.parse(requestData);
+  }
+
   let response = await fetch(requestURL);
   let data = await response.json();
+
+  sessionStorage.setItem(requestURL, JSON.stringify(data));
 
   return data;
 }
@@ -144,6 +153,8 @@ cardAdd.onclick = async () => {
 }
 
 window.onload = async () => {
+  sessionStorage.clear();
+
   createModalBody();
 
   let card1 = newCard();
