@@ -1,5 +1,5 @@
 
-const addTracker = document.querySelector("#add-tracker");
+const cardAdd = document.querySelector("#card-add");
 const cardContainer = document.querySelector("#card-container");
 const cardRow = cardContainer.querySelector("#card-row");
 
@@ -96,12 +96,12 @@ async function displayForecast(card){
   for (let i = 0; i < modal.length; i++){
     let rain = modal[i].querySelector(".rain");
     let temp = modal[i].querySelector(".temp");
-    temp.innerHTML = forecastData.forecast[i].main.temp;
+    temp.innerHTML = forecastData.forecast[i].main.temp + "°";
   }
 
 }
 
-addTracker.onclick = () => {
+cardAdd.onclick = () => {
   if(cardRow.children.length >= 8) return;
   let card = newCard();
 
