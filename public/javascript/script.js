@@ -20,7 +20,7 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(this)">View forecast</a>
+            <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
           </div>
         </div>
       </div>
@@ -87,10 +87,10 @@ async function updateCard(card, location) {
   cardTemp.innerHTML = `${locationData.temp}°`;
 }
 
-async function displayForecast(card){
-  // const location = card.closest(".card-title");
-  const location = "las vegas";
-  const forecastData = await getForecastData(location);
+async function displayForecast(event){
+  const location = event.target.closest(".card-title");
+  const locationName = location.innerHTML;
+  const forecastData = await getForecastData(locationName);
   let modal = document.querySelectorAll(".col-4 .row");
 
   for (let i = 0; i < modal.length; i++){
@@ -101,9 +101,14 @@ async function displayForecast(card){
 
 }
 
-cardAdd.onclick = () => {
+cardAdd.onclick = async () => {
   if(cardRow.children.length >= 8) return;
+
+  const selectedArea = document.querySelector("#city-selector");
+  let selection = selectedArea.options[selectedArea.selectedIndex].text;
+
   let card = newCard();
+  await updateCard(card, selection);
 
   cardRow.appendChild(card);
 }
