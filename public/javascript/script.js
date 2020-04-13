@@ -86,9 +86,11 @@ async function updateCard(card, location) {
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".card-text");
+  let cardWeatherSymbol = card.querySelector(".current-weather");
 
   cardTitle.innerHTML = `${locationData.name}`;
   cardTemp.innerHTML = `${locationData.temp}°`;
+  cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
 }
 
 async function displayForecast(event){
