@@ -55,7 +55,7 @@ async function getForecastData(location) {
 
 function removeCard(event) {
   const parentCard = event.target.closest(".col-lg-6");
-  const allCards = cardRow.querySelectorAll(".col-lg-6");;
+  const allCards = cardRow.querySelectorAll(".col-lg-6");
 
   cardRow.innerHTML = "";
 
@@ -88,9 +88,11 @@ async function updateCard(card, location) {
 }
 
 async function displayForecast(event){
-  const location = event.target.closest(".card-title");
-  const locationName = location.innerHTML;
-  const forecastData = await getForecastData(locationName);
+  const parentCard = event.target.closest(".col-lg-6");
+  const locationName = parentCard.querySelector(".card-title");
+
+  const forecastData = await getForecastData(locationName.innerText);
+
   let modal = document.querySelectorAll(".col-4 .row");
 
   for (let i = 0; i < modal.length; i++){
@@ -98,7 +100,6 @@ async function displayForecast(event){
     let temp = modal[i].querySelector(".temp");
     temp.innerHTML = forecastData.forecast[i].main.temp + "°";
   }
-
 }
 
 cardAdd.onclick = async () => {
