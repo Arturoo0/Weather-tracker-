@@ -27,6 +27,11 @@ body {
 
 .card {
   margin-bottom: 15px;
+  transition: .1s ease;
+}
+
+.card:hover {
+  transform: scale(1.01);
 }
 
 .card-btn {
@@ -89,4 +94,25 @@ button {
 
 .time {
   font-size: 1.6rem;
+}
+
+#trash-icon {
+  margin-left: 10px
+}
+
+.loading-spinner {
+  position: absolute;
+  margin: 0 auto;
+  top: 40%;
+  width: 6rem;
+  height: 6rem;
+}
+
+#remove-text {
+  display: none;
+}
+
+.remove-btn:hover #remove-text{
+  display: inline;
+  margin-right: 7px;
 }

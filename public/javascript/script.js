@@ -5,9 +5,10 @@ const cardRow = cardContainer.querySelector("#card-row");
 const saveButton = document.querySelector("#card-add");
 const cardClose = document.querySelector("#card-add-close");
 const displayStatus = document.querySelector("#error-message");
+const removeButton = document.querySelector(".remove-btn");
 
 let errorToggle = false;
-
+ 
 const cardHTML = `
 <div class="card">
   <div class="card-body">
@@ -30,7 +31,10 @@ const cardHTML = `
     </div>
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
-      <button class="remove-btn" type="button" name="button" onclick="removeCard(event)">🗑</button>
+      <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
+        <span id="remove-text">Remove</span>
+        <span id="remove-icon"><i class="fas fa-trash-alt"></i></span>
+      </button>
     </div>
   </div>
 </div>
@@ -93,7 +97,8 @@ function newCard() {
 async function updateCard(card, location) {
   const locationData = await getEndpointData(location, "location");
 
-  if (locationData.status == 400) return 400;
+  if (locationData.status == 400)
+    return 400;
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
@@ -190,6 +195,10 @@ window.onload = async () => {
 
   await updateCard(card1, "New York");
   await updateCard(card2, "Miami");
+
+  const spinner = document.querySelector(".loading-spinner");
+
+  spinner.style.display = "none";
 
   cardRow.appendChild(card1);
   cardRow.appendChild(card2);
