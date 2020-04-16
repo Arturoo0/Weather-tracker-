@@ -107,3 +107,12 @@ button {
   width: 6rem;
   height: 6rem;
 }
+
+#remove-text {
+  display: none;
+}
+
+.remove-btn:hover #remove-text{
+  display: inline;
+  margin-right: 7px;
+}

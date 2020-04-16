@@ -5,9 +5,10 @@ const cardRow = cardContainer.querySelector("#card-row");
 const saveButton = document.querySelector("#card-add");
 const cardClose = document.querySelector("#card-add-close");
 const displayStatus = document.querySelector("#error-message");
+const removeButton = document.querySelector(".remove-btn");
 
 let errorToggle = false;
-
+ 
 const cardHTML = `
 <div class="card">
   <div class="card-body">
@@ -31,7 +32,8 @@ const cardHTML = `
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
       <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
-        <span id="remove-text">Remove</span> <span id="trash-icon"> <i class="fas fa-trash-alt"> </i></span>
+        <span id="remove-text">Remove</span>
+        <span id="remove-icon"><i class="fas fa-trash-alt"></i></span>
       </button>
     </div>
   </div>
