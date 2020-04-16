@@ -46,7 +46,10 @@ const modalColHTML = `
 const weatherMapping = {
   ["Clouds"] : "☁️",
   ["Clear"] : "☀️",
-  ["Rain"] : "🌧"
+  ["Rain"] : "🌧",
+  ["Snow"] : "❄️",
+  ["Thunderstorm"] : "⛈",
+  ["Drizzle"] : "💦"
 };
 
 function createModalBody() {
@@ -54,7 +57,7 @@ function createModalBody() {
 
   const colClassList = ["col-4", "border"];
 
-  for(let i = 0; i < 8; ++i) {
+  for(let i = 0; i < 9; ++i) {
     const col = document.createElement("div");
     col.classList.add(...colClassList);
 
@@ -69,12 +72,21 @@ async function getEndpointData(location, endpoint) {
 
   if(requestData !== null) return JSON.parse(requestData);
 
-  let response = await fetch(requestURL);
-  let data = await response.json();
+  try {
+    const response = await fetch(requestURL);
 
-  sessionStorage.setItem(requestURL, JSON.stringify(data));
+    if(!response.ok) throw new Error(response.statusText);
 
-  return data;
+    const data = await response.json();
+    sessionStorage.setItem(requestURL, JSON.stringify(data));
+
+    return data;
+
+  } catch (error) {
+    return {
+      status : 400
+    }
+  }
 }
 
 function removeCard(event) {
@@ -104,9 +116,7 @@ function newCard() {
 async function updateCard(card, location) {
   const locationData = await getEndpointData(location, "location");
 
-  if (locationData.status == 400){
-    return 400;
-  }
+  if (locationData.status == 400) return 400;
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
@@ -117,7 +127,6 @@ async function updateCard(card, location) {
   cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
 
   return 200;
-
 }
 
 async function displayForecast(event){
@@ -144,18 +153,19 @@ cardAdd.onclick = async () => {
 
   const selectedArea = document.querySelector("#city-selector");
   const modal = document.querySelector("#add-card-body");
-  console.log(selectedArea.value);
+
   let selection = selectedArea.value;
 
   let card = newCard();
   let status = await updateCard(card, selection);
 
-  if (status === 400 && errorToggle === false){
-    displayStatus.classList.toggle("d-none");
+  if (status === 400){
+    if(!errorToggle)
+      displayStatus.classList.toggle("d-none");
+
     errorToggle = true;
     return;
-
-  }else if (errorToggle && status === 200){
+  }else if (status === 200 && errorToggle){
     displayStatus.classList.toggle("d-none");
     errorToggle = false;
   }
@@ -164,7 +174,7 @@ cardAdd.onclick = async () => {
 }
 
 cardClose.onclick = () => {
-  if (errorToggle){
+  if (errorToggle) {
     displayStatus.classList.toggle("d-none");
   }
   errorToggle = false;
