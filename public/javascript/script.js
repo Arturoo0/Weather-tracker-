@@ -194,6 +194,10 @@ window.onload = async () => {
   await updateCard(card1, "New York");
   await updateCard(card2, "Miami");
 
+  const spinner = document.querySelector(".loading-spinner");
+
+  spinner.style.display = "none";
+
   cardRow.appendChild(card1);
   cardRow.appendChild(card2);
 }

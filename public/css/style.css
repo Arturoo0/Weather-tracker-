@@ -99,3 +99,11 @@ button {
 #trash-icon {
   margin-left: 10px
 }
+
+.loading-spinner {
+  position: absolute;
+  margin: 0 auto;
+  top: 40%;
+  width: 6rem;
+  height: 6rem;
+}
