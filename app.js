@@ -8,7 +8,7 @@ const config = require("./config");
 const app = express();
 
 function convertKtoF(temp){
-  return 1.8 * (temp - 273) + 32;
+  return Math.floor(1.8 * (temp - 273) + 32);
 }
 
 app.use(express.static("public"));
@@ -45,8 +45,42 @@ app.get("/location", async (req, res) => {
     status : 200,
     name : weatherData.name,
     country : weatherData.sys.country,
+    weatherSymbol : weatherData.weather[0].main,
     temp : convertKtoF(weatherData.main.temp),
   });
+});
+
+app.get("/forecast", async (req, res) => {
+  
+  if(!req.query.q) return res.status(400).json({
+    status : 400,
+    message : "Missing required parameter q."
+  });
+
+  if(typeof(req.query.q) !== "string") return res.status(400).json({
+    status : 400,
+    message : "Invalid parameter q."
+  });
+
+  const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${req.query.q}&appid=${config.apikey}`
+
+  let response = await fetch(apiURL);
+  let weatherData = await response.json();
+
+  if(weatherData.cod !== "200") return res.status(400).json({
+    status : 400,
+    message : "Location not found."
+  });
+
+  weatherData.list.forEach(forecast => {
+    forecast.main.temp = convertKtoF(forecast.main.temp);
+  });
+
+  return res.status(200).json({
+    status : 200,
+    forecast : weatherData.list
+  });
+
 });
 
 app.listen(3000, () => {
