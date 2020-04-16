@@ -12,7 +12,7 @@
     <div id="title">
       Weather<span id="title-span">Tracker ⛈</span>
     </div>
-    
+
     <div id="card-container">
       <div id="card-row" class="row justify-content-center align-items-center">
       </div>
@@ -53,16 +53,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <select id="city-selector" class="form-control">
-              <option value="Las Vegas, Nevada" >Las Vegas, Nevada</option>
-              <option value="Rome, Italy">Rome, Italy</option>
-              <option value="Paris, France">Paris, France</option>
-              <option value="San Francisco, California">San Francisco, California</option>
-            </select>
+          <div id="add-card-body" class="modal-body">
+            <input id="city-selector" class="form-control form-control-lg" type="text" placeholder="Enter location name...">
+            <h3 class="d-none" id="error-message">Error, location not found! 😭</h3>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="card-add-close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button id="card-add" type="button" class="btn btn-primary">Add card</button>
           </div>
         </div>

@@ -2,6 +2,11 @@
 const cardAdd = document.querySelector("#card-add");
 const cardContainer = document.querySelector("#card-container");
 const cardRow = cardContainer.querySelector("#card-row");
+const saveButton = document.querySelector("#card-add");
+const cardClose = document.querySelector("#card-add-close");
+const displayStatus = document.querySelector("#error-message");
+
+let errorToggle = false;
 
 const cardHTML = `
 <div class="card">
@@ -99,6 +104,10 @@ function newCard() {
 async function updateCard(card, location) {
   const locationData = await getEndpointData(location, "location");
 
+  if (locationData.status == 400){
+    return 400;
+  }
+
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
   let cardWeatherSymbol = card.querySelector(".current-weather");
@@ -106,6 +115,9 @@ async function updateCard(card, location) {
   cardTitle.innerHTML = `${locationData.name}`;
   cardTemp.innerHTML = `${locationData.temp}°`;
   cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
+
+  return 200;
+
 }
 
 async function displayForecast(event){
@@ -131,12 +143,31 @@ cardAdd.onclick = async () => {
   if(cardRow.children.length >= 8) return;
 
   const selectedArea = document.querySelector("#city-selector");
-  let selection = selectedArea.options[selectedArea.selectedIndex].text;
+  const modal = document.querySelector("#add-card-body");
+  console.log(selectedArea.value);
+  let selection = selectedArea.value;
 
   let card = newCard();
-  await updateCard(card, selection);
+  let status = await updateCard(card, selection);
+
+  if (status === 400 && errorToggle === false){
+    displayStatus.classList.toggle("d-none");
+    errorToggle = true;
+    return;
+
+  }else if (errorToggle && status === 200){
+    displayStatus.classList.toggle("d-none");
+    errorToggle = false;
+  }
 
   cardRow.appendChild(card);
+}
+
+cardClose.onclick = () => {
+  if (errorToggle){
+    displayStatus.classList.toggle("d-none");
+  }
+  errorToggle = false;
 }
 
 window.onload = async () => {
