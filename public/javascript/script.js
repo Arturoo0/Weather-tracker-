@@ -30,7 +30,10 @@ const cardHTML = `
     </div>
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
-      <button class="remove-btn" type="button" name="button" onclick="removeCard(event)">Remove</button>
+      <button class="remove-btn" type="button" name="button" onclick="removeCard(event)">
+        <span id="remove-text">Remove</span> <span id="trash-icon"> <i class="fas fa-trash-alt"> </i></span>
+
+      </button>
     </div>
   </div>
 </div>

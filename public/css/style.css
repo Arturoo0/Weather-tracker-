@@ -96,10 +96,18 @@ button {
   font-size: 1.6rem;
 }
 
+#trash-icon {
+  margin-left: 10px
+}
+
 .remove-btn {
-  background-color: #c0392b;
+  background-color: #eb4559;
   color: white;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 5px;
+}
+
+.remove-btn:hover #remove-text{
+  display: none;
 }
