@@ -27,12 +27,12 @@ body {
 
 .card {
   margin-bottom: 15px;
-  /* transition: .1s ease; */
+  transition: .1s ease;
 }
 
-/* .card:hover {
-  transform: scale(1.02);
-} */
+.card:hover {
+  transform: scale(1.01);
+}
 
 .card-btn {
   background: #3fc1c9;
