@@ -66,29 +66,6 @@ function createModalBody() {
   }
 }
 
-async function getEndpointData(location, endpoint) {
-  const requestURL = `/${endpoint}?q=${location}`;
-  const requestData = sessionStorage.getItem(requestURL);
-
-  if(requestData !== null) return JSON.parse(requestData);
-
-  try {
-    const response = await fetch(requestURL);
-
-    if(!response.ok) throw new Error(response.statusText);
-
-    const data = await response.json();
-    sessionStorage.setItem(requestURL, JSON.stringify(data));
-
-    return data;
-
-  } catch (error) {
-    return {
-      status : 400
-    }
-  }
-}
-
 function removeCard(event) {
   const parentCard = event.target.closest(".col-lg-6");
   const allCards = cardRow.querySelectorAll(".col-lg-6");
@@ -127,6 +104,29 @@ async function updateCard(card, location) {
   cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
 
   return 200;
+}
+
+async function getEndpointData(location, endpoint) {
+  const requestURL = `/${endpoint}?q=${location}`;
+  const requestData = sessionStorage.getItem(requestURL);
+
+  if(requestData !== null) return JSON.parse(requestData);
+
+  try {
+    const response = await fetch(requestURL);
+
+    if(!response.ok) throw new Error(response.statusText);
+
+    const data = await response.json();
+    sessionStorage.setItem(requestURL, JSON.stringify(data));
+
+    return data;
+
+  } catch (error) {
+    return {
+      status : 400
+    }
+  }
 }
 
 async function displayForecast(event){

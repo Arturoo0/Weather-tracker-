@@ -12,12 +12,10 @@
     <div id="title">
       Weather<span id="title-span">Tracker ⛈</span>
     </div>
-
     <div id="card-container">
       <div id="card-row" class="row justify-content-center align-items-center">
       </div>
     </div>
-
     <div class="modal fade" id="forecast-modal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -37,13 +35,11 @@
         </div>
       </div>
     </div>
-
     <div id="control">
       <div id="add-tracker">
         <button class="button" data-toggle="modal" data-target="#add-card" type="button" name="button">+</button>
       </div>
     </div>
-
     <div class="modal fade" id="add-card" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -58,7 +54,7 @@
             <h3 class="d-none" id="error-message">Error, location not found! 😭</h3>
           </div>
           <div class="modal-footer">
-            <button id="card-add-close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="card-add-close" data-dismiss="modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button id="card-add" type="button" class="btn btn-primary">Add card</button>
           </div>
         </div>
