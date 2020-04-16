@@ -115,4 +115,5 @@ button {
 .remove-btn:hover #remove-text{
   display: inline;
   margin-right: 7px;
+  animation: fadeIn .7s;
 }
