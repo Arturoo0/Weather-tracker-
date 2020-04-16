@@ -27,12 +27,12 @@ body {
 
 .card {
   margin-bottom: 15px;
-  transition: .7s ease;
+  /* transition: .1s ease; */
 }
 
-.card:hover {
+/* .card:hover {
   transform: scale(1.02);
-}
+} */
 
 .card-btn {
   background: #3fc1c9;
@@ -98,16 +98,4 @@ button {
 
 #trash-icon {
   margin-left: 10px
-}
-
-.remove-btn {
-  background-color: #eb4559;
-  color: white;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-}
-
-.remove-btn:hover #remove-text{
-  display: none;
 }
