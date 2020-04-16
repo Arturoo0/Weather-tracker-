@@ -95,3 +95,11 @@ button {
 .time {
   font-size: 1.6rem;
 }
+
+.remove-btn {
+  background-color: #c0392b;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
