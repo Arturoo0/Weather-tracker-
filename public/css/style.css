@@ -27,6 +27,11 @@ body {
 
 .card {
   margin-bottom: 15px;
+  transition: .7s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
 }
 
 .card-btn {

@@ -93,7 +93,8 @@ function newCard() {
 async function updateCard(card, location) {
   const locationData = await getEndpointData(location, "location");
 
-  if (locationData.status == 400) return 400;
+  if (locationData.status == 400)
+    return 400;
 
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
