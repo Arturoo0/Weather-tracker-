@@ -108,12 +108,11 @@ button {
   height: 6rem;
 }
 
-#remove-text {
-  display: none;
+.remove-btn:hover #remove-icon{
+  margin-left: 13px;
+  transition: .2s all ease-out;
 }
 
-.remove-btn:hover #remove-text{
-  display: inline;
-  margin-right: 7px;
-  animation: fadeIn .7s;
+.remove-btn:hover::before {
+  content: "Remove";
 }
