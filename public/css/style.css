@@ -102,10 +102,14 @@ button {
 
 .loading-spinner {
   position: absolute;
+  
   margin: 0 auto;
-  top: 40%;
-  width: 6rem;
-  height: 6rem;
+  top: 50%;
+
+  width: 8rem;
+  height: 8rem;
+  margin-top: -4rem;
+  margin-left: -4rem;
 }
 
 .remove-btn:hover #remove-icon{
