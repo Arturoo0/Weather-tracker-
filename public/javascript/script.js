@@ -25,6 +25,9 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <h3 class="card-title temp-text">...</h3>
+            <h2>test</h2>
+            <h2>test</h2>
+            <h2>test</h2>
           </div>
         </div>
       </div>

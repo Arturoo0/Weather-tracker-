@@ -40,18 +40,18 @@ app.get("/location", async (req, res) => {
     status : 400,
     message : "Location not found."
   });
-
   return res.status(200).json({
     status : 200,
     name : weatherData.name,
     country : weatherData.sys.country,
     weatherSymbol : weatherData.weather[0].main,
     temp : convertKtoF(weatherData.main.temp),
+    humidity: weatherData.main.humidity,
   });
 });
 
 app.get("/forecast", async (req, res) => {
-  
+
   if(!req.query.q) return res.status(400).json({
     status : 400,
     message : "Missing required parameter q."
