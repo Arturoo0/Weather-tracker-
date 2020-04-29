@@ -6,16 +6,14 @@ body {
 
 #title {
   color: #fff;
-  font-size: 4rem;
-  font-weight: bold;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  font-size: 3rem;
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 #title-span {
   color: #3fc1c9;
-  font-size: 4rem;
-  font-weight: bold;
+  font-size: 3rem;
 }
 
 /* Card CSS */
@@ -27,11 +25,11 @@ body {
 
 .card {
   margin-bottom: 15px;
-  transition: .1s ease;
+  /* transition: .1s ease;   */
 }
 
 .card:hover {
-  transform: scale(1.01);
+  /* transform: scale(1.0025); */
 }
 
 .card-btn {
@@ -96,13 +94,9 @@ button {
   font-size: 1.6rem;
 }
 
-#trash-icon {
-  margin-left: 10px
-}
-
 .loading-spinner {
   position: absolute;
-  
+
   margin: 0 auto;
   top: 50%;
 
@@ -112,11 +106,30 @@ button {
   margin-left: -4rem;
 }
 
-.remove-btn:hover #remove-icon{
-  margin-left: 13px;
-  transition: .2s all ease-out;
+.remove-btn {
+  text-align: right;
+  transition: ease-in-out width .2s;
+  width: 20px;
 }
 
-.remove-btn:hover::before {
-  content: "Remove";
+.remove-icon {
+  padding-right: 2.5px;
+  color: #fff;
+}
+
+.remove-btn:hover {
+  width: 95px;
+}
+
+.remove-text {
+  color: #fff;
+  user-select: none;
+  opacity: 0;
+  position: absolute;
+  transition: ease-in-out opacity .2s;
+  transform: translateX(-75px);
+}
+
+.remove-btn:hover .remove-text{
+  opacity: 1;
 }

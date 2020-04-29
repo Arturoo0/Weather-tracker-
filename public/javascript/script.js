@@ -2,7 +2,6 @@
 const cardAdd = document.querySelector("#card-add");
 const cardContainer = document.querySelector("#card-container");
 const cardRow = cardContainer.querySelector("#card-row");
-const saveButton = document.querySelector("#card-add");
 const cardClose = document.querySelector("#card-add-close");
 const displayStatus = document.querySelector("#error-message");
 const removeButton = document.querySelector(".remove-btn");
@@ -25,21 +24,25 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <h3 class="card-title temp-text mb-4">...</h3>
-            <h5 id="card-humidity">...</h5>
-            <h5 id="card-windSpeed">...</h5>
+            <h5 class="card-humidity">...</h5>
+            <h5 class="card-windSpeed">...</h5>
           </div>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
-      <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
-        <span id="remove-icon"><i class="fas fa-trash-alt"></i></span>
-      </button>
+        <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
+          <div class="btn-cont">
+            <span class="remove-text">Remove</span>
+            <i class="remove-icon fas fa-trash-alt"></i>
+          </div>
+        </button>
     </div>
   </div>
 </div>
 `
+
 const modalColHTML = `
 <div class="row">
   <div class="col-12 rain text-center">...</div>
@@ -57,32 +60,24 @@ const weatherMapping = {
   ["Drizzle"] : "💦"
 };
 
-function dtConvert(dt, format){
+const months = ["January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"];
 
-  // format full == m/d/y + time
-  // format time == h:min
-  // format date == m/d/y
+function dtConvert(dt, format = "full") {
+  const date = new Date(parseInt(dt) * 1000);
+  const time = date.toLocaleTimeString("en-US");
 
-  const months = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
+  if(format === "time") return time
 
-  let dateObj = new Date(parseInt(dt) * 1000); // unix time (s -> mil)
-  let m = dateObj.getMonth() + 1;
-  let d = dateObj.getDate();
-  let y = dateObj.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
 
-  let timeObj = dateObj.toLocaleTimeString("en-US");
-  let regexTime = timeObj.replace(/:\d+ /, ' ');
+  const regexTime = (format === "date") ? ("") : (time.replace(/:\d+ /, " ") + " ");
 
-  if (format === "time"){
-    console.log();
-    return dateObj.toLocaleTimeString("en-US");
-  }else if (format === "date"){
-    return `${m}/${d}/%{y}`;
-  }else{
-    return regexTime + " " + `${m}/${d}/${y}`;
-  }
-
+  return `${regexTime}${month}/${day}/${year}`;
 }
 
 function createModalBody() {
@@ -114,7 +109,7 @@ function removeCard(event) {
 
 function newCard() {
   const newCard = document.createElement("div");
-  newCard.className = "col-lg-6 col-md-6 animated slideInUp";
+  newCard.className = "card-div col-lg-6 col-md-6 animated slideInUp";
   newCard.innerHTML = cardHTML;
 
   const removeButton = newCard.querySelector(".remove-btn");
@@ -129,16 +124,17 @@ async function updateCard(card, location) {
   if (locationData.status == 400)
     return 400;
 
-  let cardTitle = card.querySelector(".card-title");
-  let cardTemp = card.querySelector(".temp-text");
-  let cardWeatherSymbol = card.querySelector(".current-weather");
-  let cardHumidity = card.querySelector("#card-humidity");
-  let cardWindSpeed = card.querySelector("#card-windSpeed");
+  card.setAttribute("data-location", locationData.name);
+  const cardTitle = card.querySelector(".card-title");
+  const cardTemp = card.querySelector(".temp-text");
+  const cardWeatherSymbol = card.querySelector(".current-weather");
+  const cardHumidity = card.querySelector(".card-humidity");
+  const cardWindSpeed = card.querySelector(".card-windSpeed");
 
   cardHumidity.innerHTML = `Humidity: ${locationData.humidity}%`;
   cardWindSpeed.innerHTML = `Wind Speed: ${locationData.windSpeed} mph`;
   cardTitle.innerHTML = `${locationData.name}`;
-  cardTemp.innerHTML = `${locationData.temp}°`;
+  cardTemp.innerHTML = `${locationData.temp}° F`;
   cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
 
   return 200;
@@ -167,26 +163,28 @@ async function getEndpointData(location, endpoint) {
   }
 }
 
-async function displayForecast(event){
+async function displayForecast(event) {
   const parentCard = event.target.closest(".col-lg-6");
   const locationName = parentCard.querySelector(".card-title");
 
   const forecastData = await getEndpointData(locationName.innerText, "forecast");
 
-  let modal = document.querySelectorAll(".col-4 .row");
+  const modal = document.querySelectorAll(".col-4 .row");
+
+  let rain, temp, time, description;
 
   for (let i = 0; i < modal.length; i++){
-    let rain = modal[i].querySelector(".rain");
-    let temp = modal[i].querySelector(".temp");
-    let time = modal[i].querySelector(".time");
+    rain = modal[i].querySelector(".rain");
+    temp = modal[i].querySelector(".temp");
+    time = modal[i].querySelector(".time");
 
     temp.innerHTML = `${forecastData.forecast[i].main.temp}°`;
 
-    let description = forecastData.forecast[i].weather[0].main;
+    description = forecastData.forecast[i].weather[0].main;
     rain.innerHTML = weatherMapping[description];
 
     dt = forecastData.forecast[i].dt;
-    time.innerHTML = dtConvert(parseInt(dt), 'full');
+    time.innerHTML = dtConvert(parseInt(dt));
   }
 }
 
@@ -196,10 +194,10 @@ cardAdd.onclick = async () => {
   const selectedArea = document.querySelector("#city-selector");
   const modal = document.querySelector("#add-card-body");
 
-  let selection = selectedArea.value;
+  const selection = selectedArea.value;
 
-  let card = newCard();
-  let status = await updateCard(card, selection);
+  const card = newCard();
+  const status = await updateCard(card, selection);
 
   if (status === 400){
     if(!errorToggle)
@@ -222,13 +220,27 @@ cardClose.onclick = () => {
   errorToggle = false;
 }
 
+async function updateAllCards() {
+  sessionStorage.clear();
+
+  const cards = document.querySelectorAll(".card-div");
+
+  cards.forEach(async (card) => {
+    const cardLocation = card.dataset.location;
+    await updateCard(card, cardLocation);
+  });
+}
+
+// 10 minute update interval
+const updateInterval = 600000;
+
 window.onload = async () => {
   sessionStorage.clear();
 
   createModalBody();
 
-  let card1 = newCard();
-  let card2 = newCard();
+  const card1 = newCard();
+  const card2 = newCard();
 
   await updateCard(card1, "New York");
   await updateCard(card2, "Miami");
@@ -239,4 +251,6 @@ window.onload = async () => {
 
   cardRow.appendChild(card1);
   cardRow.appendChild(card2);
+
+  setInterval(async () => {await updateAllCards()}, updateInterval);
 }
