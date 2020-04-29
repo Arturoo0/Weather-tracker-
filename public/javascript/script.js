@@ -2,7 +2,6 @@
 const cardAdd = document.querySelector("#card-add");
 const cardContainer = document.querySelector("#card-container");
 const cardRow = cardContainer.querySelector("#card-row");
-const saveButton = document.querySelector("#card-add");
 const cardClose = document.querySelector("#card-add-close");
 const displayStatus = document.querySelector("#error-message");
 const removeButton = document.querySelector(".remove-btn");
@@ -25,17 +24,20 @@ const cardHTML = `
         <div class="card">
           <div class="card-body">
             <h3 class="card-title temp-text mb-4">...</h3>
-            <h5 id="card-humidity">...</h5>
-            <h5 id="card-windSpeed">...</h5>
+            <h5 class="card-humidity">...</h5>
+            <h5 class="card-windSpeed">...</h5>
           </div>
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
-      <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
-        <span id="remove-icon"><i class="fas fa-trash-alt"></i></span>
-      </button>
+        <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
+          <div class = "btn-cont">
+            <span class="remove-text">Remove</span>
+            <span class="remove-icon fas fa-trash-alt"></span>
+          </div>
+        </button>
     </div>
   </div>
 </div>
@@ -132,8 +134,8 @@ async function updateCard(card, location) {
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
   let cardWeatherSymbol = card.querySelector(".current-weather");
-  let cardHumidity = card.querySelector("#card-humidity");
-  let cardWindSpeed = card.querySelector("#card-windSpeed");
+  let cardHumidity = card.querySelector(".card-humidity");
+  let cardWindSpeed = card.querySelector(".card-windSpeed");
 
   cardHumidity.innerHTML = `Humidity: ${locationData.humidity}%`;
   cardWindSpeed.innerHTML = `Wind Speed: ${locationData.windSpeed} mph`;
