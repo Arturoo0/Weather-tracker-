@@ -25,11 +25,11 @@ body {
 
 .card {
   margin-bottom: 15px;
-  /* transition: .1s ease;   */
+  transition: .1s ease;
 }
 
 .card:hover {
-  /* transform: scale(1.0025); */
+  transform: scale(1.01);
 }
 
 .card-btn {
@@ -68,8 +68,8 @@ button {
 
 #control {
   color: white;
-  right: 60px;
-  bottom: 60px;
+  right: 30px;
+  bottom: 20px;
   position: fixed;
 }
 
