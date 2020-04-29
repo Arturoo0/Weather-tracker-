@@ -94,6 +94,8 @@ app.get("/forecast", async (req, res) => {
 
 });
 
-app.listen(3000, () => {
+let PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
   console.log("Server started at port 3000!");
 });
