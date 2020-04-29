@@ -44,7 +44,7 @@ const modalColHTML = `
 <div class="row">
   <div class="col-12 rain text-center">...</div>
   <div class="col-6 temp">...</div>
-  <div style="font-size: .2rem;" class="col-6 time mt-2">...</div>
+  <div style="font-size: .3rem; font-weight: bold;" class="col-6 time mt-2">...</div>
 </div>
 `
 
