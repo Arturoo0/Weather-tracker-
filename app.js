@@ -7,16 +7,16 @@ const config = require("./config");
 
 const app = express();
 
-function convertKtoF(temp){
+function convertKtoF(temp) {
   return Math.floor(1.8 * (temp - 273) + 32);
 }
 
 // m/s to f/s
-function convertMeterstoMiles(velocity){
+function convertMeterstoMiles(velocity) {
   return Math.floor(velocity * 2.23694);
 }
 
-function hours12(date){
+function hours12(date) {
   return (date.getHours() + 24) % 12 || 12;
 }
 
@@ -94,7 +94,7 @@ app.get("/forecast", async (req, res) => {
 
 });
 
-let PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("Server started at port 3000!");

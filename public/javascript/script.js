@@ -67,15 +67,17 @@ const months = ["January", "February", "March",
 
 function dtConvert(dt, format = "full") {
   const date = new Date(parseInt(dt) * 1000);
-  const time = date.toLocaleTimeString("en-US");
 
-  if(format === "time") return time
+  const time = date.toLocaleTimeString("en-US");
+  const timeNoSec = time.replace(/:\d+ /, " ");
+
+  if(format === "time") return timeNoSec;
 
   const month = date.getMonth() + 1;
   const day = date.getDate();
   const year = date.getFullYear();
 
-  const regexTime = (format === "date") ? ("") : (time.replace(/:\d+ /, " ") + " ");
+  const regexTime = (format === "date") ? ("") : (timeNoSec + " ");
 
   return `${regexTime}${month}/${day}/${year}`;
 }
