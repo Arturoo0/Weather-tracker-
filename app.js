@@ -11,6 +11,16 @@ function convertKtoF(temp){
   return Math.floor(1.8 * (temp - 273) + 32);
 }
 
+// m/s to f/s
+function convertMeterstoMiles(velocity){
+  return Math.floor(velocity * 2.23694);
+}
+
+function hours12(date){
+  return (date.getHours() + 24) % 12 || 12;
+}
+
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
@@ -47,6 +57,7 @@ app.get("/location", async (req, res) => {
     weatherSymbol : weatherData.weather[0].main,
     temp : convertKtoF(weatherData.main.temp),
     humidity: weatherData.main.humidity,
+    windSpeed: convertMeterstoMiles(weatherData.wind.speed),
   });
 });
 

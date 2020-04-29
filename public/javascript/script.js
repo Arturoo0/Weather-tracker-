@@ -24,10 +24,9 @@ const cardHTML = `
       <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title temp-text">...</h3>
-            <h2>test</h2>
-            <h2>test</h2>
-            <h2>test</h2>
+            <h3 class="card-title temp-text mb-4">...</h3>
+            <h5 id="card-humidity">...</h5>
+            <h5 id="card-windSpeed">...</h5>
           </div>
         </div>
       </div>
@@ -45,7 +44,7 @@ const modalColHTML = `
 <div class="row">
   <div class="col-12 rain text-center">...</div>
   <div class="col-6 temp">...</div>
-  <div class="col-6 time">...</div>
+  <div style="font-size: .2rem;" class="col-6 time mt-2">...</div>
 </div>
 `
 
@@ -57,6 +56,34 @@ const weatherMapping = {
   ["Thunderstorm"] : "⛈",
   ["Drizzle"] : "💦"
 };
+
+function dtConvert(dt, format){
+
+  // format full == m/d/y + time
+  // format time == h:min
+  // format date == m/d/y
+
+  const months = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+
+  let dateObj = new Date(parseInt(dt) * 1000); // unix time (s -> mil)
+  let m = dateObj.getMonth() + 1;
+  let d = dateObj.getDate();
+  let y = dateObj.getFullYear();
+
+  let timeObj = dateObj.toLocaleTimeString("en-US");
+  let regexTime = timeObj.replace(/:\d+ /, ' ');
+
+  if (format === "time"){
+    console.log();
+    return dateObj.toLocaleTimeString("en-US");
+  }else if (format === "date"){
+    return `${m}/${d}/%{y}`;
+  }else{
+    return regexTime + " " + `${m}/${d}/${y}`;
+  }
+
+}
 
 function createModalBody() {
   const modalRow = document.querySelector(".modal-row");
@@ -105,7 +132,11 @@ async function updateCard(card, location) {
   let cardTitle = card.querySelector(".card-title");
   let cardTemp = card.querySelector(".temp-text");
   let cardWeatherSymbol = card.querySelector(".current-weather");
+  let cardHumidity = card.querySelector("#card-humidity");
+  let cardWindSpeed = card.querySelector("#card-windSpeed");
 
+  cardHumidity.innerHTML = `Humidity: ${locationData.humidity}%`;
+  cardWindSpeed.innerHTML = `Wind Speed: ${locationData.windSpeed} mph`;
   cardTitle.innerHTML = `${locationData.name}`;
   cardTemp.innerHTML = `${locationData.temp}°`;
   cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
@@ -147,11 +178,15 @@ async function displayForecast(event){
   for (let i = 0; i < modal.length; i++){
     let rain = modal[i].querySelector(".rain");
     let temp = modal[i].querySelector(".temp");
+    let time = modal[i].querySelector(".time");
 
     temp.innerHTML = `${forecastData.forecast[i].main.temp}°`;
-    let description = forecastData.forecast[i].weather[0].main;
 
+    let description = forecastData.forecast[i].weather[0].main;
     rain.innerHTML = weatherMapping[description];
+
+    dt = forecastData.forecast[i].dt;
+    time.innerHTML = dtConvert(parseInt(dt), 'full');
   }
 }
 
