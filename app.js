@@ -41,7 +41,7 @@ app.get("/location", async (req, res) => {
     message : "Invalid parameter q."
   });
 
-  const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${req.query.q}&appid=${config.apikey}`
+  const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${req.query.q}&appid=${process.env.APIKEY}`
 
   let response = await fetch(apiURL);
   let weatherData = await response.json();
@@ -73,7 +73,7 @@ app.get("/forecast", async (req, res) => {
     message : "Invalid parameter q."
   });
 
-  const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${req.query.q}&appid=${config.apikey}`
+  const apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${req.query.q}&appid=${process.env.APIKEY}`
 
   let response = await fetch(apiURL);
   let weatherData = await response.json();
