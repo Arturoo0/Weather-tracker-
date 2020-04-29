@@ -109,16 +109,16 @@ button {
 .remove-btn {
   text-align: right;
   transition: ease-in-out width .2s;
-  width: 20px;
+  width: 15px;
 }
 
 .remove-icon {
-  padding-right: 2.5px;
+  padding-right: .5px;
   color: #fff;
 }
 
 .remove-btn:hover {
-  width: 95px;
+  width: 90px;
 }
 
 .remove-text {
