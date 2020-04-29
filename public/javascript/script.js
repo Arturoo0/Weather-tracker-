@@ -9,7 +9,7 @@ const removeButton = document.querySelector(".remove-btn");
 let errorToggle = false;
 
 const cardHTML = `
-<div class="card">
+<div class="card" data-location="">
   <div class="card-body">
     <h2 class="card-title">...</h2>
     <div class="row">
@@ -105,7 +105,7 @@ function removeCard(event) {
 
 function newCard() {
   const newCard = document.createElement("div");
-  newCard.className = "col-lg-6 col-md-6 animated slideInUp";
+  newCard.className = "card-div col-lg-6 col-md-6 animated slideInUp";
   newCard.innerHTML = cardHTML;
 
   const removeButton = newCard.querySelector(".remove-btn");
@@ -120,6 +120,7 @@ async function updateCard(card, location) {
   if (locationData.status == 400)
     return 400;
 
+  card.setAttribute("data-location", locationData.name);
   const cardTitle = card.querySelector(".card-title");
   const cardTemp = card.querySelector(".temp-text");
   const cardWeatherSymbol = card.querySelector(".current-weather");
@@ -215,6 +216,20 @@ cardClose.onclick = () => {
   errorToggle = false;
 }
 
+async function updateAllCards() {
+  sessionStorage.clear();
+
+  const cards = document.querySelectorAll(".card-div");
+
+  cards.forEach(async (card) => {
+    const cardLocation = card.dataset.location;
+    await updateCard(card, cardLocation);
+  });
+}
+
+// 10 minute update interval
+const updateInterval = 600000;
+
 window.onload = async () => {
   sessionStorage.clear();
 
@@ -232,4 +247,6 @@ window.onload = async () => {
 
   cardRow.appendChild(card1);
   cardRow.appendChild(card2);
+
+  setInterval(async () => {await updateAllCards()}, updateInterval);
 }
