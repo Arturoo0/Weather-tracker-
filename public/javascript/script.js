@@ -9,7 +9,7 @@ const removeButton = document.querySelector(".remove-btn");
 let errorToggle = false;
 
 const cardHTML = `
-<div class="card" data-location="">
+<div class="card">
   <div class="card-body">
     <h2 class="card-title">...</h2>
     <div class="row">
@@ -35,13 +35,14 @@ const cardHTML = `
         <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
           <div class="btn-cont">
             <span class="remove-text">Remove</span>
-            <span class="remove-icon fas fa-trash-alt"></span>
+            <i class="remove-icon fas fa-trash-alt"></i>
           </div>
         </button>
     </div>
   </div>
 </div>
 `
+
 const modalColHTML = `
 <div class="row">
   <div class="col-12 rain text-center">...</div>
@@ -59,9 +60,12 @@ const weatherMapping = {
   ["Drizzle"] : "💦"
 };
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ["January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"];
 
-function dtConvert(dt, format){
+function dtConvert(dt, format = "full") {
   const date = new Date(parseInt(dt) * 1000);
   const time = date.toLocaleTimeString("en-US");
 
@@ -159,7 +163,7 @@ async function getEndpointData(location, endpoint) {
   }
 }
 
-async function displayForecast(event){
+async function displayForecast(event) {
   const parentCard = event.target.closest(".col-lg-6");
   const locationName = parentCard.querySelector(".card-title");
 
@@ -180,7 +184,7 @@ async function displayForecast(event){
     rain.innerHTML = weatherMapping[description];
 
     dt = forecastData.forecast[i].dt;
-    time.innerHTML = dtConvert(parseInt(dt), "full");
+    time.innerHTML = dtConvert(parseInt(dt));
   }
 }
 
