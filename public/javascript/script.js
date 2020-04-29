@@ -71,7 +71,7 @@ function dtConvert(dt, format){
   const day = date.getDate();
   const year = date.getFullYear();
 
-  const regexTime = (format == "date") ? ("") : (time.replace(/:\d+ /, " ") + " ");
+  const regexTime = (format === "date") ? ("") : (time.replace(/:\d+ /, " ") + " ");
 
   return `${regexTime}${month}/${day}/${year}`;
 }
@@ -120,11 +120,11 @@ async function updateCard(card, location) {
   if (locationData.status == 400)
     return 400;
 
-  let cardTitle = card.querySelector(".card-title");
-  let cardTemp = card.querySelector(".temp-text");
-  let cardWeatherSymbol = card.querySelector(".current-weather");
-  let cardHumidity = card.querySelector(".card-humidity");
-  let cardWindSpeed = card.querySelector(".card-windSpeed");
+  const cardTitle = card.querySelector(".card-title");
+  const cardTemp = card.querySelector(".temp-text");
+  const cardWeatherSymbol = card.querySelector(".current-weather");
+  const cardHumidity = card.querySelector(".card-humidity");
+  const cardWindSpeed = card.querySelector(".card-windSpeed");
 
   cardHumidity.innerHTML = `Humidity: ${locationData.humidity}%`;
   cardWindSpeed.innerHTML = `Wind Speed: ${locationData.windSpeed} mph`;
@@ -164,16 +164,18 @@ async function displayForecast(event){
 
   const forecastData = await getEndpointData(locationName.innerText, "forecast");
 
-  let modal = document.querySelectorAll(".col-4 .row");
+  const modal = document.querySelectorAll(".col-4 .row");
+
+  let rain, temp, time, description;
 
   for (let i = 0; i < modal.length; i++){
-    let rain = modal[i].querySelector(".rain");
-    let temp = modal[i].querySelector(".temp");
-    let time = modal[i].querySelector(".time");
+    rain = modal[i].querySelector(".rain");
+    temp = modal[i].querySelector(".temp");
+    time = modal[i].querySelector(".time");
 
     temp.innerHTML = `${forecastData.forecast[i].main.temp}°`;
 
-    let description = forecastData.forecast[i].weather[0].main;
+    description = forecastData.forecast[i].weather[0].main;
     rain.innerHTML = weatherMapping[description];
 
     dt = forecastData.forecast[i].dt;
@@ -187,10 +189,10 @@ cardAdd.onclick = async () => {
   const selectedArea = document.querySelector("#city-selector");
   const modal = document.querySelector("#add-card-body");
 
-  let selection = selectedArea.value;
+  const selection = selectedArea.value;
 
-  let card = newCard();
-  let status = await updateCard(card, selection);
+  const card = newCard();
+  const status = await updateCard(card, selection);
 
   if (status === 400){
     if(!errorToggle)
@@ -218,8 +220,8 @@ window.onload = async () => {
 
   createModalBody();
 
-  let card1 = newCard();
-  let card2 = newCard();
+  const card1 = newCard();
+  const card2 = newCard();
 
   await updateCard(card1, "New York");
   await updateCard(card2, "Miami");
