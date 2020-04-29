@@ -110,7 +110,7 @@ button {
 
 .remove-btn {
   text-align: right;
-  transition: ease-in-out all .4s;
+  transition: ease-in-out width .2s;
   width: 20px;
 }
 
@@ -127,7 +127,7 @@ button {
   user-select: none;
   opacity: 0;
   position: absolute;
-  transition: ease-in-out opacity .4s;
+  transition: ease-in-out opacity .2s;
   transform: translateX(-75px);
 }
 

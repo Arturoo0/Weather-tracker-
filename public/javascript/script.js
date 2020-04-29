@@ -33,7 +33,7 @@ const cardHTML = `
     <div class="d-flex justify-content-between">
       <a href="#" class="btn btn-primary card-btn" data-toggle="modal" data-target="#forecast-modal" onclick="displayForecast(event)">View forecast</a>
         <button class="remove-btn btn btn-danger" type="button" name="button" onclick="removeCard(event)">
-          <div class = "btn-cont">
+          <div class="btn-cont">
             <span class="remove-text">Remove</span>
             <span class="remove-icon fas fa-trash-alt"></span>
           </div>
@@ -71,7 +71,7 @@ function dtConvert(dt, format){
   const day = date.getDate();
   const year = date.getFullYear();
 
-  const regexTime = (format == "date") ? ("") : (time.replace(/:\d+ /, ' ') + " ");
+  const regexTime = (format == "date") ? ("") : (time.replace(/:\d+ /, " ") + " ");
 
   return `${regexTime}${month}/${day}/${year}`;
 }
