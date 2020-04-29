@@ -59,32 +59,21 @@ const weatherMapping = {
   ["Drizzle"] : "💦"
 };
 
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 function dtConvert(dt, format){
+  const date = new Date(parseInt(dt) * 1000);
+  const time = date.toLocaleTimeString("en-US");
 
-  // format full == m/d/y + time
-  // format time == h:min
-  // format date == m/d/y
+  if(format === "time") return time
 
-  const months = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
 
-  let dateObj = new Date(parseInt(dt) * 1000); // unix time (s -> mil)
-  let m = dateObj.getMonth() + 1;
-  let d = dateObj.getDate();
-  let y = dateObj.getFullYear();
+  const regexTime = (format == "date") ? ("") : (time.replace(/:\d+ /, ' ') + " ");
 
-  let timeObj = dateObj.toLocaleTimeString("en-US");
-  let regexTime = timeObj.replace(/:\d+ /, ' ');
-
-  if (format === "time"){
-    console.log();
-    return dateObj.toLocaleTimeString("en-US");
-  }else if (format === "date"){
-    return `${m}/${d}/%{y}`;
-  }else{
-    return regexTime + " " + `${m}/${d}/${y}`;
-  }
-
+  return `${regexTime}${month}/${day}/${year}`;
 }
 
 function createModalBody() {
@@ -140,7 +129,7 @@ async function updateCard(card, location) {
   cardHumidity.innerHTML = `Humidity: ${locationData.humidity}%`;
   cardWindSpeed.innerHTML = `Wind Speed: ${locationData.windSpeed} mph`;
   cardTitle.innerHTML = `${locationData.name}`;
-  cardTemp.innerHTML = `${locationData.temp}°`;
+  cardTemp.innerHTML = `${locationData.temp}° F`;
   cardWeatherSymbol.innerHTML =`${weatherMapping[locationData.weatherSymbol]}`;
 
   return 200;
@@ -188,7 +177,7 @@ async function displayForecast(event){
     rain.innerHTML = weatherMapping[description];
 
     dt = forecastData.forecast[i].dt;
-    time.innerHTML = dtConvert(parseInt(dt), 'full');
+    time.innerHTML = dtConvert(parseInt(dt), "full");
   }
 }
 
