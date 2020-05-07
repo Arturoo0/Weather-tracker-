@@ -50,18 +50,28 @@ button {
 }
 
 .button {
-  background-color: #3fc1c9;
-  color: #fff;
-  font-size: 2rem;
-  display: block;
   border-radius: 50%;
-  height: 60px;
-  width: 60px;
-  transition: 0.5s;
+  width: 6vh;
+  height: 6vh;
+  background: #2fa1a9;
+}
+
+.button::before {
+  content: "+";
+  height: 6vh;
+  width: 6vh;
+  font-size: 4vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-family: courier;
+  color: white;
 }
 
 .button:hover {
-  background: #2fa1a9;
+  background-color: rgb(64,128,148);
 }
 
 /* Control CSS */
