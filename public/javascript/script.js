@@ -45,9 +45,11 @@ const cardHTML = `
 
 const modalColHTML = `
 <div class="row">
+  <div style="font-size: .3rem; font-weight: bold;" class="col-12 mt-2 d-flex justify-content-between">
+    <div style="font-size: .9rem;" class="time"></div>
+  </div>
   <div class="col-12 rain text-center">...</div>
-  <div class="col-6 temp">...</div>
-  <div style="font-size: .3rem; font-weight: bold;" class="col-6 time mt-2">...</div>
+  <div class="col-12 temp text-center">...</div>
 </div>
 `
 
@@ -186,7 +188,7 @@ async function displayForecast(event) {
     rain.innerHTML = weatherMapping[description];
 
     dt = forecastData.forecast[i].dt;
-    time.innerHTML = dtConvert(parseInt(dt));
+    time.innerHTML = dtConvert(parseInt(dt, 'time'));
   }
 }
 
