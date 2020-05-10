@@ -45,7 +45,7 @@ const cardHTML = `
 
 const modalColHTML = `
 <div class="row">
-  <div style="font-size: .3rem; font-weight: bold;" class="col-12 mt-2 d-flex justify-content-between">
+  <div style="font-size: .3rem;" class="col-12 mt-2 d-flex justify-content-between">
     <div style="font-size: 1rem;" class="time"></div>
   </div>
   <div class="col-12 rain text-center">...</div>
